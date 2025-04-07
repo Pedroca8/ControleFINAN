@@ -1,0 +1,666 @@
+:root {
+    --primary-color: #2ecc71;
+    --secondary-color: #e74c3c;
+    --tertiary-color: #3498db;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --gray-color: #bdc3c7;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    background-color: var(--dark-color);
+    color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+h1, h2, h3 {
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+header h1 {
+    color: white;
+}
+
+.balance {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.total {
+    border-top: 5px solid var(--tertiary-color);
+}
+
+.income {
+    border-top: 5px solid var(--primary-color);
+}
+
+.expense {
+    border-top: 5px solid var(--secondary-color);
+}
+
+/* Estilos para finanças fixas */
+.fixed-finances {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.fixed-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+}
+
+.fixed-income-section, .fixed-expense-section {
+    background-color: var(--light-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.fixed-income-section {
+    border-left: 5px solid var(--primary-color);
+}
+
+.fixed-expense-section {
+    border-left: 5px solid var(--secondary-color);
+}
+
+.fixed-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.fixed-list {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.fixed-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.fixed-list li .fixed-item-details {
+    flex: 1;
+}
+
+.fixed-list li .fixed-day {
+    margin-left: 10px;
+    background-color: var(--dark-color);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.fixed-list li .fixed-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.fixed-total {
+    margin-top: 15px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.transaction-form, .history, .reports {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--gray-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--tertiary-color);
+}
+
+.btn, .btn-small, .btn-report {
+    background-color: var(--tertiary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover, .btn-small:hover, .btn-report:hover {
+    background-color: #2980b9;
+}
+
+.btn-small {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+.btn-report {
+    background-color: var(--dark-color);
+    margin-right: 10px;
+}
+
+.btn-report:hover {
+    background-color: #1a2530;
+}
+
+.btn-secondary {
+    background-color: var(--gray-color);
+    color: var(--dark-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 10px auto;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #a1a6a9;
+}
+
+.filter-controls, .report-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.date-range input {
+    width: auto;
+}
+
+/* Estilos para opções de visualização */
+.transaction-display-options {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.transaction-display-options label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.transaction-display-options input[type="radio"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+.transactions-container {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.transactions-list {
+    list-style: none;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.transaction-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+}
+
+.transaction-item.income::before {
+    background-color: var(--primary-color);
+}
+
+.transaction-item.expense::before {
+    background-color: var(--secondary-color);
+}
+
+.transaction-details {
+    flex: 1;
+}
+
+.transaction-details h4 {
+    margin-bottom: 5px;
+}
+
+.transaction-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.transaction-amount {
+    font-weight: bold;
+}
+
+.income .transaction-amount {
+    color: var(--primary-color);
+}
+
+.expense .transaction-amount {
+    color: var(--secondary-color);
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-btn, .view-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.delete-btn {
+    color: #e74c3c;
+}
+
+.view-btn {
+    color: var(--tertiary-color);
+}
+
+.delete-btn:hover, .view-btn:hover {
+    opacity: 1;
+}
+
+.transaction-notes {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--gray-color);
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+/* Estilos para modo detalhado */
+.transaction-item.detailed {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.transaction-item.detailed .transaction-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.transaction-item.detailed .transaction-meta {
+    margin-top: 8px;
+}
+
+.transaction-item.detailed .transaction-actions {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+/* Estilos para os modais */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: modalFade 0.3s ease;
+}
+
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--gray-color);
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--dark-color);
+}
+
+#transactionDetails {
+    margin-top: 20px;
+}
+
+#transactionDetails .detail-row {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+#transactionDetails .detail-label {
+    width: 120px;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+#transactionDetails .detail-value {
+    flex: 1;
+}
+
+.chart-container {
+    margin-top: 20px;
+    height: 300px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: var(--dark-color);
+    color: white;
+    border-radius: var(--border-radius);
+}
+
+footer span {
+    font-weight: bold;
+    color: var(--light-color);
+}
+
+@media (max-width: 768px) {
+    .balance {
+        grid-template-columns: 1fr;
+    }
+    
+    .fixed-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .transaction-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .transaction-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .transaction-amount {
+        margin-top: 10px;
+    }
+    
+    .delete-btn, .view-btn {
+        padding: 8px 12px;
+    }
+    
+    .delete-btn {
+        margin-right: 5px;
+    }
+    
+    .view-btn {
+        margin-left: 0;
+    }
+    
+    .modal-content {
+        width: 90%;
+    }
+}
+
+/* Adicionando melhorias para dispositivos móveis e PWA */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    header {
+        margin-bottom: 20px;
+        padding: 15px 0;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .card p {
+        font-size: 1.3rem;
+    }
+    
+    .fixed-finances,
+    .transaction-form,
+    .history,
+    .reports {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .form-control {
+        margin-bottom: 10px;
+    }
+    
+    input, select, textarea {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .btn, .btn-small, .btn-report {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .fixed-list li {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .fixed-list li .fixed-day {
+        padding: 2px 6px;
+        font-size: 12px;
+    }
+    
+    .filter-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .date-range {
+        margin-top: 10px;
+    }
+    
+    .date-range span {
+        display: block;
+        margin: 5px 0;
+    }
+    
+    .transaction-display-options {
+        margin-top: 10px;
+    }
+}
+
+/* Estilos para dar suporte a experiência de aplicativo */
+@media (display-mode: standalone) {
+    /* Remove efeitos de seleção de texto para parecer mais com um app nativo */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+    
+    body {
+        overscroll-behavior: none; /* Previne comportamento de scroll do navegador */
+        overflow-x: hidden;
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+    
+    /* Botões mais touch-friendly */
+    .btn, .btn-small, .btn-report, .btn-secondary, 
+    .delete-btn, .view-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    input, select, textarea {
+        font-size: 16px; /* Evita zoom automático em inputs no iOS */
+    }
+    
+    /* Animações suaves para interações touch */
+    .card, .transaction-item, .fixed-list li, 
+    .btn, .btn-small, .btn-report, .btn-secondary {
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    
+    .card:active, .transaction-item:active, .fixed-list li:active,
+    .btn:active, .btn-small:active, .btn-report:active, .btn-secondary:active {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+}

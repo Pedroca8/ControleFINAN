@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Favicon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .instructions {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerador de Favicon para ControleFINAN</h1>
+    
+    <div class="instructions">
+        <h3>Instruções:</h3>
+        <ol>
+            <li>Clique no botão "Gerar Favicon" abaixo</li>
+            <li>Clique com o botão direito na imagem gerada e selecione "Salvar imagem como..."</li>
+            <li>Salve o arquivo como "favicon.ico" na pasta "icons"</li>
+        </ol>
+    </div>
+    
+    <button id="generateFavicon">Gerar Favicon</button>
+    
+    <div>
+        <canvas id="iconCanvas" width="32" height="32"></canvas>
+    </div>
+    
+    <script>
+        document.getElementById('generateFavicon').addEventListener('click', function() {
+            const canvas = document.getElementById('iconCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Cor de fundo verde
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(0, 0, 32, 32);
+            
+            // Letra "C" em branco
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('C', 16, 16);
+            
+            // Mostrar mensagem
+            alert('Favicon gerado! Clique com o botão direito na imagem e selecione "Salvar imagem como..." ou "Salvar como..."\n\nSalve como "favicon.ico" na pasta "icons"');
+        });
+    </script>
+</body>
+</html> 

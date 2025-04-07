@@ -1,0 +1,31 @@
+SOBRE OS ÍCONES DO APP
+
+Para que seu aplicativo funcione corretamente como um PWA, você precisa criar os seguintes ícones:
+
+1. icon-72x72.png
+2. icon-96x96.png
+3. icon-128x128.png
+4. icon-144x144.png
+5. icon-152x152.png
+6. icon-192x192.png
+7. icon-384x384.png
+8. icon-512x512.png
+9. favicon.ico
+
+Você pode criar estes ícones de várias maneiras:
+
+1. Use um editor de imagem como Photoshop, GIMP ou Canva
+2. Use geradores de ícones online como:
+   - https://app-manifest.firebaseapp.com/
+   - https://realfavicongenerator.net/
+   - https://www.pwabuilder.com/
+
+3. Se você tiver Node.js instalado, você pode executar o script generate-icon.js nesta pasta:
+   a) Instale as dependências: npm install canvas
+   b) Execute: node generate-icon.js
+
+Os ícones devem ter um fundo de cor #4CAF50 (verde) e podem mostrar a letra "C" ou um símbolo de dinheiro ($) em branco no centro.
+
+Coloque todos os ícones gerados na pasta /icons do seu projeto.
+
+Quando todos os ícones estiverem prontos, seu aplicativo poderá ser instalado nos dispositivos móveis! 

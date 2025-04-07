@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Controle Financeiro">
+    <meta name="description" content="Aplicativo de Controle Financeiro Pessoal">
+    <title>Controle Financeiro Pessoal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Controle Financeiro Pessoal</h1>
+        </header>
+
+        <section class="balance">
+            <div class="card total">
+                <h3>Saldo Atual</h3>
+                <p id="balance">R$ 0,00</p>
+            </div>
+            <div class="card income">
+                <h3>Entradas</h3>
+                <p id="income">R$ 0,00</p>
+            </div>
+            <div class="card expense">
+                <h3>Saídas</h3>
+                <p id="expense">R$ 0,00</p>
+            </div>
+        </section>
+
+        <!-- Nova seção para rendas fixas e despesas fixas -->
+        <section class="fixed-finances">
+            <h2>Finanças Recorrentes</h2>
+            <div class="fixed-container">
+                <div class="fixed-income-section">
+                    <h3>Rendas Fixas Mensais</h3>
+                    <div class="fixed-controls">
+                        <button id="addFixedIncome" class="btn-small">
+                            <i class="fas fa-plus"></i> Adicionar Renda
+                        </button>
+                    </div>
+                    <ul id="fixedIncomeList" class="fixed-list"></ul>
+                    <div class="fixed-total">
+                        <span>Total: </span>
+                        <span id="fixedIncomeTotal">R$ 0,00</span>
+                    </div>
+                </div>
+                <div class="fixed-expense-section">
+                    <h3>Contas Fixas Mensais</h3>
+                    <div class="fixed-controls">
+                        <button id="addFixedExpense" class="btn-small">
+                            <i class="fas fa-plus"></i> Adicionar Conta
+                        </button>
+                    </div>
+                    <ul id="fixedExpenseList" class="fixed-list"></ul>
+                    <div class="fixed-total">
+                        <span>Total: </span>
+                        <span id="fixedExpenseTotal">R$ 0,00</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="transaction-form">
+            <h2>Nova Transação</h2>
+            <form id="form">
+                <div class="form-control">
+                    <label for="description">Descrição</label>
+                    <input type="text" id="description" placeholder="Descrição da transação" required>
+                </div>
+                <div class="form-control">
+                    <label for="amount">Valor (R$)</label>
+                    <input type="number" id="amount" step="0.01" placeholder="Valor da transação" required>
+                </div>
+                <div class="form-control">
+                    <label for="date">Data</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-control">
+                    <label for="type">Tipo</label>
+                    <select id="type" required>
+                        <option value="income">Entrada</option>
+                        <option value="expense">Saída</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="category">Categoria</label>
+                    <select id="category" required>
+                        <option value="salary">Salário</option>
+                        <option value="investment">Investimento</option>
+                        <option value="food">Alimentação</option>
+                        <option value="transport">Transporte</option>
+                        <option value="home">Moradia</option>
+                        <option value="leisure">Lazer</option>
+                        <option value="health">Saúde</option>
+                        <option value="education">Educação</option>
+                        <option value="other">Outros</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="notes">Observações (opcional)</label>
+                    <textarea id="notes" rows="2" placeholder="Detalhes adicionais sobre esta transação"></textarea>
+                </div>
+                <button class="btn">Adicionar Transação</button>
+            </form>
+        </section>
+
+        <section class="history">
+            <h2>Histórico de Transações</h2>
+            <div class="filter-controls">
+                <div class="period-filter">
+                    <label for="period">Período:</label>
+                    <select id="period">
+                        <option value="all">Todos</option>
+                        <option value="month">Este Mês</option>
+                        <option value="year">Este Ano</option>
+                        <option value="custom">Personalizado</option>
+                    </select>
+                </div>
+                <div class="date-range" id="dateRangeContainer" style="display: none;">
+                    <input type="date" id="startDate">
+                    <span>até</span>
+                    <input type="date" id="endDate">
+                    <button id="applyFilter" class="btn-small">Aplicar</button>
+                </div>
+            </div>
+            
+            <div class="transaction-display-options">
+                <label>
+                    <input type="radio" name="displayMode" value="compact" checked> Resumido 
+                </label>
+                <label>
+                    <input type="radio" name="displayMode" value="detailed"> Detalhado
+                </label>
+            </div>
+            
+            <div class="transactions-container">
+                <ul id="transactions" class="transactions-list"></ul>
+                <button id="loadMoreTransactions" class="btn-secondary" style="display: none;">Ver Mais Transações</button>
+            </div>
+            
+            <!-- Modal para detalhes completos da transação -->
+            <div id="transactionModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Detalhes da Transação</h3>
+                    <div id="transactionDetails"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reports">
+            <h2>Relatórios</h2>
+            <div class="report-controls">
+                <button id="showChart" class="btn-report">Gráfico de Categorias</button>
+                <button id="exportData" class="btn-report">Exportar Dados</button>
+            </div>
+            <div id="chartContainer" class="chart-container" style="display: none;">
+                <canvas id="categoriesChart"></canvas>
+            </div>
+        </section>
+    </div>
+
+    <!-- Templates para modais -->
+    <div id="fixedIncomeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Adicionar Renda Fixa Mensal</h3>
+            <form id="fixedIncomeForm">
+                <div class="form-control">
+                    <label for="fixedIncomeDescription">Descrição</label>
+                    <input type="text" id="fixedIncomeDescription" required>
+                </div>
+                <div class="form-control">
+                    <label for="fixedIncomeAmount">Valor (R$)</label>
+                    <input type="number" id="fixedIncomeAmount" step="0.01" required>
+                </div>
+                <div class="form-control">
+                    <label for="fixedIncomeDay">Dia do recebimento</label>
+                    <input type="number" id="fixedIncomeDay" min="1" max="31" required>
+                </div>
+                <button type="submit" class="btn">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="fixedExpenseModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Adicionar Conta Fixa Mensal</h3>
+            <form id="fixedExpenseForm">
+                <div class="form-control">
+                    <label for="fixedExpenseDescription">Descrição</label>
+                    <input type="text" id="fixedExpenseDescription" required>
+                </div>
+                <div class="form-control">
+                    <label for="fixedExpenseAmount">Valor (R$)</label>
+                    <input type="number" id="fixedExpenseAmount" step="0.01" required>
+                </div>
+                <div class="form-control">
+                    <label for="fixedExpenseDay">Dia do vencimento</label>
+                    <input type="number" id="fixedExpenseDay" min="1" max="31" required>
+                </div>
+                <div class="form-control">
+                    <label for="fixedExpenseCategory">Categoria</label>
+                    <select id="fixedExpenseCategory" required>
+                        <option value="home">Moradia</option>
+                        <option value="transport">Transporte</option>
+                        <option value="food">Alimentação</option>
+                        <option value="health">Saúde</option>
+                        <option value="education">Educação</option>
+                        <option value="leisure">Lazer</option>
+                        <option value="other">Outros</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>Controle Financeiro Pessoal - Desenvolvido para ajudar no controle das suas finanças.</p>
+        <p>feito por <span>@Pedro Henrique</span></p>
+        <p><a href="install.html" style="color: #4CAF50; text-decoration: none; font-weight: bold;">Como instalar este app no seu celular</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Registrar o Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registrado com sucesso:', registration);
+                    })
+                    .catch((error) => {
+                        console.log('Falha ao registrar o Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html> 
